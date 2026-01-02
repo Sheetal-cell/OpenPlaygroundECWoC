@@ -8,8 +8,19 @@ function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+
+
 function renderTodos() {
     todoList.innerHTML = '';
+
+    const emptyMessage = document.getElementById('emptyMessage');
+
+    if (todos.length === 0) {
+        emptyMessage.style.display = 'block';
+    } else {
+        emptyMessage.style.display = 'none';
+    }
+
     todos.forEach((todo, index) => {
         const li = document.createElement('li');
         li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
@@ -27,6 +38,9 @@ function renderTodos() {
         todoList.appendChild(li);
     });
 }
+
+
+
 
 function addTodo() {
     const text = todoInput.value.trim();
