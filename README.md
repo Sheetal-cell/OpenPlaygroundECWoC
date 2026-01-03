@@ -33,6 +33,7 @@ Our community has built some amazing projects:
 - **Quiz Game** - Interactive quiz with multiple categories
 - **Digital Clock** - Real-time clock with customizable themes
 - **QR Code Generator**- A simple and interactive QR Code Generator.
+- **Instagram Bio Generator** - Generate random bio suggestions with emojis and vibes.
 
 
 *[View all projects →](https://yadavakhileshh.github.io/OpenPlayground/)*
@@ -143,9 +144,7 @@ Looking for inspiration? Try building:
 
 Thanks to all the amazing developers who have contributed to OpenPlayground:
 
-<a href="https://github.com/YadavAkhileshh/OpenPlayground/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=YadavAkhileshh/OpenPlayground" />
-</a>
+[![Contributors](https://contrib.rocks/image?repo=YadavAkhileshh/OpenPlayground)](https://github.com/YadavAkhileshh/OpenPlayground/graphs/contributors)
 
 ## License
 
