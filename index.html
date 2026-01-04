@@ -15,320 +15,878 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
-    <style>
-        /* Contributors Section Styling */
-        .contributors-section {
-            padding: 5rem 1.5rem;
-            background: var(--bg-secondary);
-            position: relative;
-            overflow: hidden;
-            scroll-margin-top: 75px;
-            /* For anchor links to account for fixed navbar */
-        }
+<style>
+    /* Dark Theme Variables - Improved Color Scheme */
+    :root {
+        /* Light theme (default) - Modern light theme */
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --text-primary: #111827;
+        --text-secondary: #6b7280;
+        --border-light: #e5e7eb;
+        --card-bg: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.85);
+        --primary-color: #2563eb;
+        --primary-hover: #1d4ed8;
+        --accent-color: #8b5cf6;
+        --success-color: #10b981;
+        --warning-color: #f59e0b;
+        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.12);
+        --gradient-primary: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
+        --gradient-secondary: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    }
+    
+    [data-theme="dark"] {
+        /* Dark theme - Modern dark theme (Deep Blue/Purple Theme) */
+        --bg-primary: #0a0a1a; /* Deep navy blue */
+        --bg-secondary: #111827; /* Dark slate blue */
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --border-light: #334155;
+        --card-bg: #1e293b;
+        --glass-bg: rgba(10, 10, 26, 0.85);
+        --primary-color: #60a5fa; /* Brighter blue for dark mode */
+        --primary-hover: #93c5fd;
+        --accent-color: #c084fc; /* Brighter purple for dark mode */
+        --success-color: #34d399;
+        --warning-color: #fbbf24;
+        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --gradient-primary: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+        --gradient-secondary: linear-gradient(135deg, #111827 0%, #0a0a1a 100%);
+    }
 
+    /* Enhanced Theme Toggle */
+    .theme-toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .theme-toggle {
+        background: var(--card-bg);
+        border: 2px solid var(--primary-color);
+        width: 56px;
+        height: 28px;
+        border-radius: 50px;
+        padding: 2px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+    }
+
+    [data-theme="dark"] .theme-toggle:hover {
+        box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+    }
+
+    .theme-toggle-slider {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        position: absolute;
+        left: 3px;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.8rem;
+    }
+
+    [data-theme="dark"] .theme-toggle-slider {
+        left: calc(100% - 25px);
+        background: var(--primary-color);
+    }
+
+    .theme-toggle-icon {
+        position: absolute;
+        font-size: 0.9rem;
+        transition: opacity 0.3s ease;
+    }
+
+    .theme-toggle-icon.sun {
+        left: 7px;
+        color: #f59e0b;
+        opacity: 1;
+    }
+
+    .theme-toggle-icon.moon {
+        right: 7px;
+        color: #c084fc;
+        opacity: 0.5;
+    }
+
+    [data-theme="dark"] .theme-toggle-icon.sun {
+        opacity: 0.5;
+    }
+
+    [data-theme="dark"] .theme-toggle-icon.moon {
+        opacity: 1;
+    }
+
+    .theme-label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        transition: color 0.3s ease;
+    }
+
+    /* Contributors Section Styling */
+    .contributors-section {
+        padding: 5rem 1.5rem;
+        background: var(--bg-secondary);
+        position: relative;
+        overflow: hidden;
+        scroll-margin-top: 75px;
+    }
+
+    .contributors-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        max-width: 1280px;
+        margin: 3rem auto 0;
+    }
+
+    .contributor-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid var(--border-light);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: var(--card-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contributor-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .contributor-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .contributor-card:hover::before {
+        opacity: 1;
+    }
+
+    .contributor-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid transparent;
+        background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                    var(--gradient-primary) border-box;
+        transition: transform 0.3s ease;
+    }
+
+    .contributor-card:hover .contributor-avatar {
+        transform: scale(1.05);
+    }
+
+    .contributor-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .contributor-username {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    .contributor-contributions {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-color);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+
+    [data-theme="dark"] .contributor-contributions {
+        background: rgba(96, 165, 250, 0.15);
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .contributor-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 0.5rem;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+    }
+
+    .contributor-link:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    [data-theme="dark"] .contributor-link:hover {
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    }
+
+    /* Loading skeletons */
+    .loading-skeleton {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        animation: pulse 2s infinite;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--card-shadow);
+    }
+
+    .skeleton-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, 
+            var(--border-light) 25%, 
+            rgba(255,255,255,0.1) 50%, 
+            var(--border-light) 75%);
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+        margin: 0 auto 1rem;
+    }
+
+    .skeleton-text {
+        height: 20px;
+        background: var(--border-light);
+        border-radius: 4px;
+        margin: 0.5rem 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .skeleton-text::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255,255,255,0.1), 
+            transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Error State */
+    .contributors-error {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-secondary);
+        grid-column: 1 / -1;
+        background: var(--card-bg);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--card-shadow);
+    }
+
+    .error-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    /* Load More Button */
+    .view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 2rem auto 0;
+        padding: 0.75rem 1.5rem;
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .view-all-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        transition: left 0.3s ease;
+        z-index: -1;
+    }
+
+    .view-all-btn:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    }
+
+    .view-all-btn:hover::before {
+        left: 0;
+    }
+
+    [data-theme="dark"] .view-all-btn:hover {
+        box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+    }
+
+    .contributors-show-more {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
         .contributors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 1280px;
-            margin: 3rem auto 0;
-        }
-
-        .contributor-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-light);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1rem;
         }
-
-        .contributor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        
+        .contributor-card {
+            padding: 1rem;
         }
-
+        
         .contributor-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
+            width: 60px;
+            height: 60px;
         }
 
-        .contributor-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
+        .theme-toggle-container {
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .contributor-username {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 0;
+        .theme-label {
+            font-size: 0.75rem;
         }
+    }
 
-        .contributor-contributions {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.8rem;
-            background: rgba(37, 99, 235, 0.1);
-            color: #2563eb;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+    /* Pagination Styles */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 40px 0;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 
-        .contributor-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 0.5rem;
-            transition: opacity 0.2s ease;
-        }
+    .pagination-container button {
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 2px solid var(--border-light);
+        background: var(--card-bg);
+        color: var(--text-primary);
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        min-width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .contributor-link:hover {
-            opacity: 0.9;
-        }
+    .pagination-container button:hover:not(.active) {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    }
 
-        /* Loading skeletons */
-        .loading-skeleton {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            animation: pulse 1.5s infinite;
-        }
+    [data-theme="dark"] .pagination-container button:hover:not(.active) {
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+    }
 
-        .skeleton-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            margin: 0 auto 1rem;
-        }
+    .pagination-container button.active {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+    }
 
-        .skeleton-text {
-            height: 20px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-        }
+    [data-theme="dark"] .pagination-container button.active {
+        box-shadow: 0 4px 15px rgba(96, 165, 250, 0.35);
+    }
 
-        @keyframes pulse {
+    .card.hidden {
+        display: none !important;
+    }
 
-            0%,
-            100% {
-                opacity: 1;
-            }
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-secondary);
+        background: var(--card-bg);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--card-shadow);
+        max-width: 500px;
+        margin: 2rem auto;
+    }
 
-            50% {
-                opacity: 0.5;
-            }
-        }
+    .empty-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
 
-        /* Error State */
-        .contributors-error {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
+    /* Navbar Styles */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px) saturate(180%);
+        border-bottom: 1px solid var(--border-light);
+        transition: all 0.3s ease;
+    }
 
-        .error-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+    .nav-container {
+        max-width: 1280px;
+        margin: auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
 
-        /* Load More Button */
-        .view-all-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 2rem auto 0;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
 
-        .view-all-btn:hover {
-            background: var(--primary-color);
-            color: rgb(26, 6, 92);
-        }
+    .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--text-primary);
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
 
-        .contributors-show-more {
-            text-align: center;
-            margin-top: 2rem;
-        }
+    .nav-toggle:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .contributors-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
-            }
+    [data-theme="dark"] .nav-toggle:hover {
+        background: rgba(96, 165, 250, 0.15);
+    }
 
-            .contributor-card {
-                padding: 1rem;
-            }
-
-            .contributor-avatar {
-                width: 60px;
-                height: 60px;
-            }
-        }
-    </style>
-    <style>
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .pagination-container button {
-            padding: 8px 14px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .pagination-container button.active {
-            background: #2563eb;
-            color: white;
-            border-color: #2563eb;
-        }
-
-        .pagination-container button:hover {
-            background: #e5e7eb;
-        }
-
-        .card.hidden {
-            display: none !important;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-    </style>
-
-    <style>
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 9999;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
+    /* ✅ FIXED MOBILE NAVBAR */
+    @media (max-width: 768px) {
+        .nav-toggle {
+            display: block !important;
+            z-index: 10000;
         }
 
         .nav-links {
-            display: flex;
-            gap: 1.5rem;
+            position: fixed !important;
+            top: 75px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100vh - 75px) !important;
+
+            flex-direction: column !important;
+            background: var(--glass-bg) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            padding: 2rem !important;
+            gap: 1.5rem !important;
+
+            display: none !important;
+            transform: none !important;
+            z-index: 9999 !important;
+            border-top: 1px solid var(--border-light);
         }
 
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
+        .nav-links.active {
+            display: flex !important;
         }
 
-        /* ✅ FIXED MOBILE NAVBAR (ONLY CHANGE HERE) */
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block !important;
-                z-index: 10000;
-            }
-
-            .nav-links {
-                position: fixed !important;
-                top: 75px !important;
-                left: 0 !important;
-                width: 100% !important;
-                height: calc(100vh - 75px) !important;
-
-                flex-direction: column !important;
-                background: var(--glass-bg) !important;
-                backdrop-filter: var(--glass-blur) !important;
-                padding: 1.5rem !important;
-                gap: 1.2rem !important;
-
-                display: none !important;
-                /* 🔥 KEY FIX */
-                transform: none !important;
-                z-index: 9999 !important;
-            }
-
-            .nav-links.active {
-                display: flex !important;
-                /* 🔥 KEY FIX */
-            }
+        .theme-toggle-container {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
         }
+    }
 
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block !important;
-                color: var(--text-primary) !important;
-            }
-        }
+    body {
+        padding-top: 75px;
+        background: var(--gradient-secondary);
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+        min-height: 100vh;
+    }
 
-        body {
-            padding-top: 75px;
-        }
-    </style>
+    /* Hero Section */
+    .hero-section {
+        background: var(--gradient-secondary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    [data-theme="dark"] .hero-section::before {
+        background: radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(192, 132, 252, 0.15) 0%, transparent 50%);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        font-weight: 600;
+        background: rgba(37, 99, 235, 0.15);
+        color: var(--primary-color);
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    [data-theme="dark"] .hero-badge {
+        background: rgba(96, 165, 250, 0.2);
+        border-color: rgba(96, 165, 250, 0.4);
+    }
+
+    /* Cards */
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-light);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--card-shadow);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: var(--primary-color);
+    }
+
+    .card-heading {
+        color: var(--text-primary);
+        font-weight: 700;
+    }
+
+    .card-description {
+        color: var(--text-secondary);
+    }
+
+    /* Filter buttons */
+    .filter-btn {
+        background: var(--card-bg);
+        color: var(--text-primary);
+        border: 2px solid var(--border-light);
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .filter-btn:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+    }
+
+    [data-theme="dark"] .filter-btn.active {
+        box-shadow: 0 4px 15px rgba(96, 165, 250, 0.35);
+    }
+
+    /* Search and sort boxes */
+    .search-box, .sort-box {
+        background: var(--card-bg);
+        border: 2px solid var(--border-light);
+        transition: all 0.3s ease;
+    }
+
+    .search-box:focus-within, .sort-box:focus-within {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    [data-theme="dark"] .search-box:focus-within, 
+    [data-theme="dark"] .sort-box:focus-within {
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
+    .search-box input, .sort-box select {
+        background: transparent;
+        color: var(--text-primary);
+    }
+
+    .search-box input::placeholder {
+        color: var(--text-secondary);
+    }
+
+    /* Code blocks */
+    .code-block {
+        background: var(--card-bg);
+        color: var(--text-primary);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        border: 2px solid var(--border-light);
+        overflow-x: auto;
+        text-align: left;
+        word-break: break-all;
+        white-space: pre-wrap;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] .code-block {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .code-block code {
+        display: block;
+        color: var(--text-primary);
+        line-height: 1.5;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
+    /* Footer */
+    .footer {
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--border-light);
+        position: relative;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--gradient-primary);
+    }
+
+    .social-link {
+        color: var(--text-primary);
+        background: var(--card-bg);
+        border: 2px solid var(--border-light);
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    [data-theme="dark"] .social-link:hover {
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+    }
+
+    /* Scroll to top button */
+    #scrollToTopBtn {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+        z-index: 1000;
+    }
+
+    #scrollToTopBtn:hover {
+        transform: translateY(-4px) scale(1.1);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+    }
+
+    [data-theme="dark"] #scrollToTopBtn {
+        box-shadow: 0 4px 15px rgba(96, 165, 250, 0.35);
+    }
+
+    [data-theme="dark"] #scrollToTopBtn:hover {
+        box-shadow: 0 8px 25px rgba(96, 165, 250, 0.45);
+    }
+
+    /* Additional styles for better dark theme */
+    .section-title .gradient-text {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .step-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-light);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: var(--primary-color);
+    }
+
+    .contribute-section {
+        background: var(--bg-secondary);
+        position: relative;
+    }
+
+    .projects-section {
+        background: var(--bg-primary);
+    }
+
+    /* Improve text visibility in dark mode */
+    [data-theme="dark"] .hero-subtitle {
+        color: #cbd5e1;
+    }
+
+    [data-theme="dark"] .section-subtitle {
+        color: #cbd5e1;
+    }
+
+    [data-theme="dark"] .footer-description {
+        color: #cbd5e1;
+    }
+
+    /* Nav link styles */
+    .nav-link {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
+
+    [data-theme="dark"] .nav-link:hover {
+        background: rgba(96, 165, 250, 0.15);
+    }
+
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .nav-logo i {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+</style>
 </head>
 
 <body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle-wrapper">
-        <button id="toggle-mode-btn" aria-label="Toggle theme">
-            <i class="ri-sun-line" id="theme-icon"></i>
-        </button>
-    </div>
-
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
@@ -337,10 +895,6 @@
                 <span>OpenPlayground</span>
             </a>
 
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <i class="ri-menu-3-line"></i>
-            </button>
-
             <div class="nav-links" id="navLinks">
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#contribute" class="nav-link">Contribute</a>
@@ -348,11 +902,26 @@
                 <a href="https://github.com/YadavAkhileshh/OpenPlayground" target="_blank" class="nav-link">
                     <i class="ri-github-fill"></i> GitHub
                 </a>
+                
+                <!-- Enhanced Theme Toggle -->
+                <div class="theme-toggle-container">
+                    <span class="theme-label">Theme</span>
+                    <div class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-toggle-icon sun">☀️</span>
+                        <span class="theme-toggle-icon moon">🌙</span>
+                        <div class="theme-toggle-slider"></div>
+                    </div>
+                </div>
             </div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <i class="ri-menu-3-line"></i>
+            </button>
         </div>
     </nav>
 
     <script>
+        // Mobile navbar toggle
         const toggle = document.getElementById("navToggle");
         const links = document.getElementById("navLinks");
 
@@ -388,20 +957,12 @@
         justify-content: center;
         text-align: center;
         padding: 2rem;
-        background: url('your-hero-image.jpg') center/cover no-repeat;
     ">
-
-        <div class="hero-grid" style="
-            position: absolute;
-            width: 100%; height: 100%;
-            display: grid;
-            z-index: 1;
-        "></div>
 
         <div class="hero-content" style="
             position: relative;
             z-index: 2;
-            color: #111;
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -410,15 +971,7 @@
             max-width: 800px;
         ">
 
-            <div class="hero-badge fade-up" style="
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.5rem 1rem;
-                border-radius: 999px;
-                font-weight: 500;
-                background: transparent;
-            ">
+            <div class="hero-badge fade-up">
                 <span class="badge-icon"><i class="ri-rocket-line"></i></span>
                 <span class="badge-text">v2.0 Community Launch</span>
             </div>
@@ -427,20 +980,16 @@
                 font-size: 4rem;
                 font-weight: 800;
                 line-height: 1.2;
-                color: #111;
+                color: var(--text-primary);
             ">
-                <span class="text-gradient" style="
-                    background: linear-gradient(90deg,#2563eb,#9333ea);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                ">Build,</span> Share and Explore
+                <span class="text-gradient">Build,</span> Share and Explore
             </h1>
 
             <p class="hero-subtitle fade-up delay-200" style="
                 font-size: 1.5rem;
                 line-height: 1.6;
                 max-width: 700px;
-                color: #111;
+                color: var(--text-secondary);
             ">
                 A community-driven platform where developers showcase their creativity through interactive web projects
             </p>
@@ -458,7 +1007,7 @@
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.8rem 1.5rem;
-                    background: #2563eb;
+                    background: var(--primary-color);
                     color: white;
                     border-radius: 8px;
                     font-weight: 600;
@@ -473,14 +1022,14 @@
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.8rem 1.5rem;
-                    border: 2px solid #111;
-                    color: #111;
+                    border: 2px solid var(--text-primary);
+                    color: var(--text-primary);
                     border-radius: 8px;
                     font-weight: 600;
                     text-decoration: none;
                     transition: 0.2s;
-                " onmouseover="this.style.background='#111'; this.style.color='white'"
-                    onmouseout="this.style.background='transparent'; this.style.color='#111'">
+                " onmouseover="this.style.background='var(--text-primary)'; this.style.color='var(--bg-primary)'"
+                    onmouseout="this.style.background='transparent'; this.style.color='var(--text-primary)'">
                     <i class="ri-github-fill"></i> GitHub
                 </a>
             </div>
@@ -511,12 +1060,8 @@
                     <option value="newest">Newest</option>
                 </select>
             </div>
-            <!-- Surprise Me Button -->
-            <button id="surprise-btn" class="filter-btn"
-                style="background: var(--accent); color: white; border: none; margin-left: 10px;">
-                <i class="ri-shuffle-fill"></i> Surprise Me
-            </button>
         </div>
+
         <!-- Category Filters -->
         <div class="category-filter">
             <button class="filter-btn active" data-filter="all">
@@ -772,8 +1317,7 @@
 
             <!-- random joke generator -->
             <a href="./projects/random-joke-generator/index.html" class="card" data-category="fun">
-                <div class="card-cover"
-                    style="background:#a5b4fc;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#a5b4fc;display:flex;align-items:center;justify-content:center">
                     <i class="ri-emotion-laugh-line"></i>
                 </div>
                 <div class="card-content">
@@ -795,8 +1339,7 @@
 
             <!-- random dice generator -->
             <a href="./projects/random-dice-generator/index.html" class="card" data-category="fun">
-                <div class="card-cover"
-                    style="background:#fde68a;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#fde68a;display:flex;align-items:center;justify-content:center">
                     <i class="ri-dice-line"></i>
                 </div>
                 <div class="card-content">
@@ -818,8 +1361,7 @@
 
             <!-- chat app -->
             <a href="./projects/chat-app/index.html" class="card" data-category="communication">
-                <div class="card-cover"
-                    style="background:#a7f3d0;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#a7f3d0;display:flex;align-items:center;justify-content:center">
                     <i class="ri-chat-3-line"></i>
                 </div>
                 <div class="card-content">
@@ -841,8 +1383,7 @@
 
             <!-- captcha generator -->
             <a href="./projects/captcha-generator/index.html" class="card" data-category="security">
-                <div class="card-cover"
-                    style="background:#c7d2fe;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#c7d2fe;display:flex;align-items:center;justify-content:center">
                     <i class="ri-shield-keyhole-line"></i>
                 </div>
                 <div class="card-content">
@@ -864,8 +1405,7 @@
 
             <!-- typing speed test -->
             <a href="./projects/typing-speed-test/index.html" class="card" data-category="utility">
-                <div class="card-cover"
-                    style="background:#fde2e4;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#fde2e4;display:flex;align-items:center;justify-content:center">
                     <i class="ri-keyboard-line"></i>
                 </div>
                 <div class="card-content">
@@ -887,8 +1427,7 @@
 
             <!-- todo list -->
             <a href="./projects/todo-list/index.html" class="card" data-category="utility">
-                <div class="card-cover"
-                    style="background:#e0f2fe;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#e0f2fe;display:flex;align-items:center;justify-content:center">
                     <i class="ri-checkbox-line"></i>
                 </div>
                 <div class="card-content">
@@ -910,8 +1449,7 @@
 
             <!-- Tic Tac Toe -->
             <a href="./projects/tic-tac-toe/index.html" class="card" data-category="strategy">
-                <div class="card-cover"
-                    style="background:#ddd6fe;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#ddd6fe;display:flex;align-items:center;justify-content:center">
                     <i class="ri-grid-line"></i>
                 </div>
                 <div class="card-content">
@@ -933,8 +1471,7 @@
 
             <!-- random quote -->
             <a href="./projects/random-quote-generator/index.html" class="card" data-category="fun">
-                <div class="card-cover"
-                    style="background:#fde68a;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#fde68a;display:flex;align-items:center;justify-content:center">
                     <i class="ri-double-quotes-l"></i>
                 </div>
                 <div class="card-content">
@@ -957,8 +1494,7 @@
 
             <!-- password generator -->
             <a href="./projects/password-generator/index.html" class="card" data-category="security">
-                <div class="card-cover"
-                    style="background:#fecaca;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#fecaca;display:flex;align-items:center;justify-content:center">
                     <i class="ri-lock-password-line"></i>
                 </div>
                 <div class="card-content">
@@ -980,8 +1516,7 @@
 
             <!-- bmi calculator -->
             <a href="./projects/bmi-calculator/index.html" class="card" data-category="utility">
-                <div class="card-cover"
-                    style="background:#c7f9cc;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#c7f9cc;display:flex;align-items:center;justify-content:center">
                     <i class="ri-heart-pulse-line"></i>
                 </div>
                 <div class="card-content">
@@ -1003,8 +1538,7 @@
 
             <!-- Age Calculator -->
             <a href="./projects/age-calculator/index.html" class="card" data-category="utility">
-                <div class="card-cover"
-                    style="background:#bae6fd;display:flex;align-items:center;justify-content:center">
+                <div class="card-cover" style="background:#bae6fd;display:flex;align-items:center;justify-content:center">
                     <i class="ri-calendar-line"></i>
                 </div>
                 <div class="card-content">
@@ -1119,8 +1653,7 @@
 
             <!-- Color Palette Generator -->
             <a href="./projects/color-palette-generator/index.html" class="card" data-category="utility">
-                <div class="card-cover"
-                    style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white">
+                <div class="card-cover" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:white">
                     <i class="ri-palette-line"></i>
                 </div>
                 <div class="card-content">
@@ -1135,8 +1668,7 @@
 
             <!-- Infinite Runner -->
             <a href="./projects/InfiniteParallaxRunner/index.html" class="card" data-category="action">
-                <div class="card-cover"
-                    style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color:white">
+                <div class="card-cover" style="background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color:white">
                     <i class="ri-gamepad-line"></i>
                 </div>
                 <div class="card-content">
@@ -1358,39 +1890,39 @@
         </div>
     </section>
 
-    <!-- Contributors Section -->
-    <section id="contributors" class="contributors-section">
-        <div class="section-header">
-            <span class="section-badge">Community</span>
-            <h2 class="section-title">Hall of <span class="gradient-text">Contributors</span></h2>
-            <p class="section-subtitle">Thanks to everyone who has contributed to this project!</p>
-        </div>
+<!-- Contributors Section -->
+<section id="contributors" class="contributors-section">
+    <div class="section-header">
+        <span class="section-badge">Community</span>
+        <h2 class="section-title">Hall of <span class="gradient-text">Contributors</span></h2>
+        <p class="section-subtitle">Thanks to everyone who has contributed to this project!</p>
+    </div>
 
-        <div class="contributors-grid" id="contributors-grid">
-            <!-- Loading skeletons will be shown here initially -->
-            <div class="loading-skeleton">
-                <div class="skeleton-avatar"></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text"></div>
-            </div>
-            <div class="loading-skeleton">
-                <div class="skeleton-avatar"></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text"></div>
-            </div>
-            <div class="loading-skeleton">
-                <div class="skeleton-avatar"></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text"></div>
-            </div>
+    <div class="contributors-grid" id="contributors-grid">
+        <!-- Loading skeletons will be shown here initially -->
+        <div class="loading-skeleton">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text"></div>
         </div>
+        <div class="loading-skeleton">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text"></div>
+        </div>
+        <div class="loading-skeleton">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text"></div>
+        </div>
+    </div>
 
-        <div class="contributors-show-more">
-            <button id="loadMoreContributors" class="view-all-btn" style="display: none;">
-                <i class="ri-user-add-line"></i> Load More Contributors
-            </button>
-        </div>
-    </section>
+    <div class="contributors-show-more">
+        <button id="loadMoreContributors" class="view-all-btn" style="display: none;">
+            <i class="ri-user-add-line"></i> Load More Contributors
+        </button>
+    </div>
+</section>
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" aria-label="Scroll to top">
@@ -1477,36 +2009,36 @@
             </div>
         </div>
     </footer>
-    <script>
-        // GitHub API Configuration
-        const GITHUB_API_URL = 'https://api.github.com/repos/YadavAkhileshh/OpenPlayground/contributors';
-        const CONTRIBUTORS_TO_SHOW = 12; // Show 12 contributors initially
+<script>
+    // GitHub API Configuration
+    const GITHUB_API_URL = 'https://api.github.com/repos/YadavAkhileshh/OpenPlayground/contributors';
+    const CONTRIBUTORS_TO_SHOW = 12; // Show 12 contributors initially
 
-        // DOM Elements
-        const contributorsGrid = document.getElementById('contributors-grid');
-        const loadMoreBtn = document.getElementById('loadMoreContributors');
+    // DOM Elements
+    const contributorsGrid = document.getElementById('contributors-grid');
+    const loadMoreBtn = document.getElementById('loadMoreContributors');
 
-        // Fetch contributors from GitHub API
-        async function fetchContributors() {
-            try {
-                const response = await fetch(`${GITHUB_API_URL}?per_page=100`);
-
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status}`);
-                }
-
-                const contributors = await response.json();
-                return contributors;
-            } catch (error) {
-                console.error('Error fetching contributors:', error);
-                showErrorState();
-                return [];
+    // Fetch contributors from GitHub API
+    async function fetchContributors() {
+        try {
+            const response = await fetch(`${GITHUB_API_URL}?per_page=100`);
+            
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
             }
-        }
 
-        // Create contributor card HTML (SIMPLIFIED - no User/Type)
-        function createContributorCard(contributor) {
-            return `
+            const contributors = await response.json();
+            return contributors;
+        } catch (error) {
+            console.error('Error fetching contributors:', error);
+            showErrorState();
+            return [];
+        }
+    }
+
+    // Create contributor card HTML (SIMPLIFIED - no User/Type)
+    function createContributorCard(contributor) {
+        return `
             <div class="contributor-card">
                 <img 
                     src="${contributor.avatar_url}" 
@@ -1534,135 +2066,80 @@
                 </a>
             </div>
         `;
+    }
+
+    // Display contributors in the grid
+    function displayContributors(contributors) {
+        // Remove loading skeletons
+        contributorsGrid.innerHTML = '';
+        
+        if (contributors.length === 0) {
+            showNoContributors();
+            return;
         }
 
-        // Display contributors in the grid
-        function displayContributors(contributors) {
-            // Remove loading skeletons
-            contributorsGrid.innerHTML = '';
+        // Filter out bots and limit to CONTRIBUTORS_TO_SHOW
+        const filteredContributors = contributors
+            .filter(contributor => !contributor.login.includes('[bot]'))
+            .slice(0, CONTRIBUTORS_TO_SHOW);
 
-            if (contributors.length === 0) {
-                showNoContributors();
-                return;
-            }
+        // Add contributor cards
+        filteredContributors.forEach(contributor => {
+            const cardHTML = createContributorCard(contributor);
+            contributorsGrid.innerHTML += cardHTML;
+        });
 
-            // Filter out bots and limit to CONTRIBUTORS_TO_SHOW
-            const filteredContributors = contributors
-                .filter(contributor => !contributor.login.includes('[bot]'))
-                .slice(0, CONTRIBUTORS_TO_SHOW);
-
-            // Add contributor cards
-            filteredContributors.forEach(contributor => {
-                const cardHTML = createContributorCard(contributor);
-                contributorsGrid.innerHTML += cardHTML;
-            });
-
-            // Show load more button if there are more contributors
-            const humanContributors = contributors.filter(c => !c.login.includes('[bot]'));
-            if (humanContributors.length > CONTRIBUTORS_TO_SHOW) {
-                loadMoreBtn.style.display = 'inline-flex';
-            }
+        // Show load more button if there are more contributors
+        const humanContributors = contributors.filter(c => !c.login.includes('[bot]'));
+        if (humanContributors.length > CONTRIBUTORS_TO_SHOW) {
+            loadMoreBtn.style.display = 'inline-flex';
         }
+    }
 
-        // Load more contributors
-        async function loadMoreContributors() {
-            const allContributors = await fetchContributors();
-            const humanContributors = allContributors.filter(c => !c.login.includes('[bot]'));
+    // Load more contributors
+    async function loadMoreContributors() {
+        const allContributors = await fetchContributors();
+        const humanContributors = allContributors.filter(c => !c.login.includes('[bot]'));
+        
+        // Show all contributors
+        contributorsGrid.innerHTML = '';
+        humanContributors.forEach(contributor => {
+            const cardHTML = createContributorCard(contributor);
+            contributorsGrid.innerHTML += cardHTML;
+        });
+        
+        // Hide the load more button after clicking
+        loadMoreBtn.style.display = 'none';
+    }
 
-            // Show all contributors
-            contributorsGrid.innerHTML = '';
-            humanContributors.forEach(contributor => {
-                const cardHTML = createContributorCard(contributor);
-                contributorsGrid.innerHTML += cardHTML;
-            });
-
-            // Hide the load more button after clicking
-            loadMoreBtn.style.display = 'none';
-        }
-
-        // Show error state
-        function showErrorState() {
-            contributorsGrid.innerHTML = `
+    // Show error state
+    function showErrorState() {
+        contributorsGrid.innerHTML = `
             <div class="contributors-error">
                 <div class="error-icon">😕</div>
                 <h3>Unable to load contributors</h3>
                 <p>Please check your internet connection or try again later.</p>
             </div>
         `;
-            loadMoreBtn.style.display = 'none';
-        }
+        loadMoreBtn.style.display = 'none';
+    }
 
-        // Show no contributors state
-        function showNoContributors() {
-            contributorsGrid.innerHTML = `
+    // Show no contributors state
+    function showNoContributors() {
+        contributorsGrid.innerHTML = `
             <div class="contributors-error">
                 <div class="error-icon">👤</div>
                 <h3>No contributors found</h3>
                 <p>Be the first to contribute to this project!</p>
             </div>
         `;
-<<<<<<< HEAD
-            loadMoreBtn.style.display = 'none';
-        }
-
-        // Initialize contributors
-        async function initContributors() {
-            const contributors = await fetchContributors();
-            displayContributors(contributors);
-        }
-
-        // Event Listeners
-        loadMoreBtn.addEventListener('click', loadMoreContributors);
-
-        // Initialize contributors when the page loads
-        window.addEventListener('load', initContributors);
-    </script>
-
-    <script>
-        // Force scroll to top when page loads
-        window.addEventListener('load', function () {
-            // Scroll to top immediately
-            window.scrollTo(0, 0);
-
-            // Also scroll to top after a short delay to ensure it works
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 100);
-        });
-
-        // Also scroll to top when DOM is ready
-        document.addEventListener('DOMContentLoaded', function () {
-            window.scrollTo(0, 0);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const navbarHeight = 75;
-                    const targetPosition = targetElement.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-    =======
-    loadMoreBtn.style.display = 'none';
+        loadMoreBtn.style.display = 'none';
     }
 
     // Initialize contributors
     async function initContributors() {
-    const contributors = await fetchContributors();
-    displayContributors(contributors);
+        const contributors = await fetchContributors();
+        displayContributors(contributors);
     }
 
     // Event Listeners
@@ -1670,313 +2147,358 @@
 
     // Initialize contributors when the page loads
     window.addEventListener('load', initContributors);
-    </script>
+</script> 
 
-    <script>
-        // Force scroll to top when page loads
-        window.addEventListener('load', function () {
-            // Scroll to top immediately
+<script>
+    // Force scroll to top when page loads
+    window.addEventListener('load', function() {
+        // Scroll to top immediately
+        window.scrollTo(0, 0);
+        
+        // Also scroll to top after a short delay to ensure it works
+        setTimeout(() => {
             window.scrollTo(0, 0);
+        }, 100);
+    });
 
-            // Also scroll to top after a short delay to ensure it works
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 100);
+    // Also scroll to top when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        window.scrollTo(0, 0);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navbarHeight = 75;
+                const targetPosition = targetElement.offsetTop - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
-
-        // Also scroll to top when DOM is ready
-        document.addEventListener('DOMContentLoaded', function () {
-            window.scrollTo(0, 0);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const navbarHeight = 75;
-                    const targetPosition = targetElement.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+    });
+</script> 
+<script>
+    // PROJECTS FILTERING AND PAGINATION SYSTEM
+    
+    class ProjectManager {
+        constructor() {
+            this.cards = Array.from(document.querySelectorAll(".projects-container .card"));
+            this.filteredCards = [];
+            this.paginationContainer = document.getElementById("pagination-controls");
+            this.emptyState = document.getElementById("empty-state");
+            this.searchInput = document.getElementById("project-search");
+            this.sortSelect = document.getElementById("project-sort");
+            this.filterButtons = document.querySelectorAll(".filter-btn");
+            
+            this.currentPage = 1;
+            this.cardsPerPage = 9;
+            this.currentFilter = "all";
+            this.currentSort = "default";
+            this.currentSearch = "";
+            
+            this.init();
+        }
+        
+        init() {
+            // Add data attributes for sorting if not present
+            this.addDateAttributes();
+            
+            // Initialize event listeners
+            this.initEventListeners();
+            
+            // Apply initial filter and sort
+            this.applyFilters();
+            this.showPage(1);
+        }
+        
+        addDateAttributes() {
+            // Add date attributes for sorting by "newest"
+            const categories = ["utility", "puzzle", "game", "strategy", "action", "fun", "security", "communication", "finance"];
+            const currentDate = new Date();
+            
+            this.cards.forEach((card, index) => {
+                if (!card.hasAttribute('data-date')) {
+                    // Create incremental dates (newer projects first)
+                    const daysAgo = Math.floor(index / 3); // Group projects by 3
+                    const fakeDate = new Date(currentDate);
+                    fakeDate.setDate(currentDate.getDate() - daysAgo);
+                    card.setAttribute('data-date', fakeDate.toISOString());
                 }
             });
-        });
-    </script>
-    <script>
-        // PROJECTS FILTERING AND PAGINATION SYSTEM
-
-        class ProjectManager {
-            constructor() {
-                this.cards = Array.from(document.querySelectorAll(".projects-container .card"));
-                this.filteredCards = [];
-                this.paginationContainer = document.getElementById("pagination-controls");
-                this.emptyState = document.getElementById("empty-state");
-                this.searchInput = document.getElementById("project-search");
-                this.sortSelect = document.getElementById("project-sort");
-                this.filterButtons = document.querySelectorAll(".filter-btn");
-
-                this.currentPage = 1;
-                this.cardsPerPage = 9;
-                this.currentFilter = "all";
-                this.currentSort = "default";
-                this.currentSearch = "";
-
-                this.init();
-            }
-
-            init() {
-                // Add data attributes for sorting if not present
-                this.addDateAttributes();
-
-                // Initialize event listeners
-                this.initEventListeners();
-
-                // Apply initial filter and sort
+        }
+        
+        initEventListeners() {
+            // Search input
+            this.searchInput.addEventListener("input", (e) => {
+                this.currentSearch = e.target.value.toLowerCase();
                 this.applyFilters();
                 this.showPage(1);
-            }
-
-            addDateAttributes() {
-                // Add date attributes for sorting by "newest"
-                const categories = ["utility", "puzzle", "game", "strategy", "action", "fun", "security", "communication", "finance"];
-                const currentDate = new Date();
-
-                this.cards.forEach((card, index) => {
-                    if (!card.hasAttribute('data-date')) {
-                        // Create incremental dates (newer projects first)
-                        const daysAgo = Math.floor(index / 3); // Group projects by 3
-                        const fakeDate = new Date(currentDate);
-                        fakeDate.setDate(currentDate.getDate() - daysAgo);
-                        card.setAttribute('data-date', fakeDate.toISOString());
-                    }
-                });
-            }
-
-            initEventListeners() {
-                // Search input
-                this.searchInput.addEventListener("input", (e) => {
-                    this.currentSearch = e.target.value.toLowerCase();
+            });
+            
+            // Sort select
+            this.sortSelect.addEventListener("change", (e) => {
+                this.currentSort = e.target.value;
+                this.applyFilters();
+                this.showPage(1);
+            });
+            
+            // Filter buttons
+            this.filterButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    // Update active button
+                    this.filterButtons.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    
+                    // Apply filter
+                    this.currentFilter = btn.dataset.filter;
                     this.applyFilters();
                     this.showPage(1);
                 });
-
-                // Sort select
-                this.sortSelect.addEventListener("change", (e) => {
-                    this.currentSort = e.target.value;
-                    this.applyFilters();
-                    this.showPage(1);
-                });
-
-                // Filter buttons
-                this.filterButtons.forEach(btn => {
-                    btn.addEventListener("click", () => {
-                        // Update active button
-                        this.filterButtons.forEach(b => b.classList.remove("active"));
-                        btn.classList.add("active");
-
-                        // Apply filter
-                        this.currentFilter = btn.dataset.filter;
-                        this.applyFilters();
-                        this.showPage(1);
-                    });
-                });
-
-                // Window resize for responsive pagination
-                window.addEventListener("resize", () => {
-                    this.updatePagination();
-                });
-            }
-
-            applyFilters() {
-                let filtered = [...this.cards];
-
-                // Apply search filter
-                if (this.currentSearch) {
-                    filtered = filtered.filter(card => {
-                        const title = card.querySelector(".card-heading").textContent.toLowerCase();
-                        const description = card.querySelector(".card-description").textContent.toLowerCase();
-                        const tech = card.querySelector(".card-tech").textContent.toLowerCase();
-                        const category = card.dataset.category.toLowerCase();
-
-                        return title.includes(this.currentSearch) ||
-                            description.includes(this.currentSearch) ||
-                            tech.includes(this.currentSearch) ||
-                            category.includes(this.currentSearch);
-                    });
-                }
-
-                // Apply category filter
-                if (this.currentFilter !== "all") {
-                    filtered = filtered.filter(card =>
-                        card.dataset.category === this.currentFilter
-                    );
-                }
-
-                // Apply sorting
-                filtered = this.sortCards(filtered);
-
-                this.filteredCards = filtered;
+            });
+            
+            // Window resize for responsive pagination
+            window.addEventListener("resize", () => {
                 this.updatePagination();
-                this.updateEmptyState();
-            }
-
-            sortCards(cards) {
-                const sorted = [...cards];
-
-                switch (this.currentSort) {
-                    case "az":
-                        sorted.sort((a, b) => {
-                            const titleA = a.querySelector(".card-heading").textContent.toLowerCase();
-                            const titleB = b.querySelector(".card-heading").textContent.toLowerCase();
-                            return titleA.localeCompare(titleB);
-                        });
-                        break;
-
-                    case "za":
-                        sorted.sort((a, b) => {
-                            const titleA = a.querySelector(".card-heading").textContent.toLowerCase();
-                            const titleB = b.querySelector(".card-heading").textContent.toLowerCase();
-                            return titleB.localeCompare(titleA);
-                        });
-                        break;
-
-                    case "newest":
-                        sorted.sort((a, b) => {
-                            const dateA = new Date(a.getAttribute("data-date"));
-                            const dateB = new Date(b.getAttribute("data-date"));
-                            return dateB - dateA; // Newest first
-                        });
-                        break;
-
-                    case "default":
-                    default:
-                        // Keep original order
-                        break;
-                }
-
-                return sorted;
-            }
-
-            showPage(page) {
-                this.currentPage = page;
-                const start = (page - 1) * this.cardsPerPage;
-                const end = start + this.cardsPerPage;
-
-                // Hide all cards first
-                this.cards.forEach(card => {
-                    card.style.display = "none";
-                    card.classList.add("hidden");
-                });
-
-                // Show filtered cards for current page
-                this.filteredCards.forEach((card, index) => {
-                    if (index >= start && index < end) {
-                        card.style.display = "block";
-                        card.classList.remove("hidden");
-                    }
-                });
-
-                this.updateActiveButton();
-                this.scrollToProjects();
-            }
-
-            updatePagination() {
-                this.paginationContainer.innerHTML = "";
-                const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerPage);
-
-                // Only show pagination if there are multiple pages
-                if (totalPages > 1) {
-                    // Previous button
-                    if (this.currentPage > 1) {
-                        const prevBtn = document.createElement("button");
-                        prevBtn.innerHTML = "&laquo;";
-                        prevBtn.addEventListener("click", () => this.showPage(this.currentPage - 1));
-                        this.paginationContainer.appendChild(prevBtn);
-                    }
-
-                    // Page buttons
-                    const maxVisiblePages = 5;
-                    let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
-                    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-                    // Adjust start page if we're near the end
-                    if (endPage - startPage + 1 < maxVisiblePages) {
-                        startPage = Math.max(1, endPage - maxVisiblePages + 1);
-                    }
-
-                    for (let i = startPage; i <= endPage; i++) {
-                        const btn = document.createElement("button");
-                        btn.textContent = i;
-                        btn.classList.toggle("active", i === this.currentPage);
-                        btn.addEventListener("click", () => this.showPage(i));
-                        this.paginationContainer.appendChild(btn);
-                    }
-
-                    // Next button
-                    if (this.currentPage < totalPages) {
-                        const nextBtn = document.createElement("button");
-                        nextBtn.innerHTML = "&raquo;";
-                        nextBtn.addEventListener("click", () => this.showPage(this.currentPage + 1));
-                        this.paginationContainer.appendChild(nextBtn);
-                    }
-
-                    this.paginationContainer.style.display = "flex";
-                } else {
-                    this.paginationContainer.style.display = "none";
-                }
-            }
-
-            updateActiveButton() {
-                const buttons = this.paginationContainer.querySelectorAll("button");
-                buttons.forEach((btn, index) => {
-                    // Skip previous/next buttons
-                    if (btn.innerHTML !== "&laquo;" && btn.innerHTML !== "&raquo;") {
-                        const pageNum = parseInt(btn.textContent);
-                        btn.classList.toggle("active", pageNum === this.currentPage);
-                    }
+            });
+        }
+        
+        applyFilters() {
+            let filtered = [...this.cards];
+            
+            // Apply search filter
+            if (this.currentSearch) {
+                filtered = filtered.filter(card => {
+                    const title = card.querySelector(".card-heading").textContent.toLowerCase();
+                    const description = card.querySelector(".card-description").textContent.toLowerCase();
+                    const tech = card.querySelector(".card-tech").textContent.toLowerCase();
+                    const category = card.dataset.category.toLowerCase();
+                    
+                    return title.includes(this.currentSearch) ||
+                           description.includes(this.currentSearch) ||
+                           tech.includes(this.currentSearch) ||
+                           category.includes(this.currentSearch);
                 });
             }
-
-            updateEmptyState() {
-                if (this.filteredCards.length === 0) {
-                    this.emptyState.style.display = "block";
-                } else {
-                    this.emptyState.style.display = "none";
-                }
+            
+            // Apply category filter
+            if (this.currentFilter !== "all") {
+                filtered = filtered.filter(card => 
+                    card.dataset.category === this.currentFilter
+                );
             }
-
-            scrollToProjects() {
-                // Smooth scroll to projects section when changing pages
-                const projectsSection = document.getElementById("projects");
-                if (projectsSection && this.currentPage > 1) {
-                    const navbarHeight = 75;
-                    const targetPosition = projectsSection.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: "smooth"
+            
+            // Apply sorting
+            filtered = this.sortCards(filtered);
+            
+            this.filteredCards = filtered;
+            this.updatePagination();
+            this.updateEmptyState();
+        }
+        
+        sortCards(cards) {
+            const sorted = [...cards];
+            
+            switch(this.currentSort) {
+                case "az":
+                    sorted.sort((a, b) => {
+                        const titleA = a.querySelector(".card-heading").textContent.toLowerCase();
+                        const titleB = b.querySelector(".card-heading").textContent.toLowerCase();
+                        return titleA.localeCompare(titleB);
                     });
+                    break;
+                    
+                case "za":
+                    sorted.sort((a, b) => {
+                        const titleA = a.querySelector(".card-heading").textContent.toLowerCase();
+                        const titleB = b.querySelector(".card-heading").textContent.toLowerCase();
+                        return titleB.localeCompare(titleA);
+                    });
+                    break;
+                    
+                case "newest":
+                    sorted.sort((a, b) => {
+                        const dateA = new Date(a.getAttribute("data-date"));
+                        const dateB = new Date(b.getAttribute("data-date"));
+                        return dateB - dateA; // Newest first
+                    });
+                    break;
+                    
+                case "default":
+                default:
+                    // Keep original order
+                    break;
+            }
+            
+            return sorted;
+        }
+        
+        showPage(page) {
+            this.currentPage = page;
+            const start = (page - 1) * this.cardsPerPage;
+            const end = start + this.cardsPerPage;
+            
+            // Hide all cards first
+            this.cards.forEach(card => {
+                card.style.display = "none";
+                card.classList.add("hidden");
+            });
+            
+            // Show filtered cards for current page
+            this.filteredCards.forEach((card, index) => {
+                if (index >= start && index < end) {
+                    card.style.display = "block";
+                    card.classList.remove("hidden");
                 }
+            });
+            
+            this.updateActiveButton();
+            this.scrollToProjects();
+        }
+        
+        updatePagination() {
+            this.paginationContainer.innerHTML = "";
+            const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerPage);
+            
+            // Only show pagination if there are multiple pages
+            if (totalPages > 1) {
+                // Previous button
+                if (this.currentPage > 1) {
+                    const prevBtn = document.createElement("button");
+                    prevBtn.innerHTML = "&laquo;";
+                    prevBtn.addEventListener("click", () => this.showPage(this.currentPage - 1));
+                    this.paginationContainer.appendChild(prevBtn);
+                }
+                
+                // Page buttons
+                const maxVisiblePages = 5;
+                let startPage = Math.max(1, this.currentPage - Math.floor(maxVisiblePages / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                
+                // Adjust start page if we're near the end
+                if (endPage - startPage + 1 < maxVisiblePages) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                }
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const btn = document.createElement("button");
+                    btn.textContent = i;
+                    btn.classList.toggle("active", i === this.currentPage);
+                    btn.addEventListener("click", () => this.showPage(i));
+                    this.paginationContainer.appendChild(btn);
+                }
+                
+                // Next button
+                if (this.currentPage < totalPages) {
+                    const nextBtn = document.createElement("button");
+                    nextBtn.innerHTML = "&raquo;";
+                    nextBtn.addEventListener("click", () => this.showPage(this.currentPage + 1));
+                    this.paginationContainer.appendChild(nextBtn);
+                }
+                
+                this.paginationContainer.style.display = "flex";
+            } else {
+                this.paginationContainer.style.display = "none";
             }
         }
+        
+        updateActiveButton() {
+            const buttons = this.paginationContainer.querySelectorAll("button");
+            buttons.forEach((btn, index) => {
+                // Skip previous/next buttons
+                if (btn.innerHTML !== "&laquo;" && btn.innerHTML !== "&raquo;") {
+                    const pageNum = parseInt(btn.textContent);
+                    btn.classList.toggle("active", pageNum === this.currentPage);
+                }
+            });
+        }
+        
+        updateEmptyState() {
+            if (this.filteredCards.length === 0) {
+                this.emptyState.style.display = "block";
+            } else {
+                this.emptyState.style.display = "none";
+            }
+        }
+        
+        scrollToProjects() {
+            // Smooth scroll to projects section when changing pages
+            const projectsSection = document.getElementById("projects");
+            if (projectsSection && this.currentPage > 1) {
+                const navbarHeight = 75;
+                const targetPosition = projectsSection.offsetTop - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+    }
+    
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        const projectManager = new ProjectManager();
+        
+        // Expose to global scope if needed
+        window.ProjectManager = projectManager;
+    });
+</script>
 
-        // Initialize when DOM is loaded
-        document.addEventListener("DOMContentLoaded", function () {
-            const projectManager = new ProjectManager();
+<script>
+    // DARK THEME TOGGLE FUNCTIONALITY
+    
+    // Get theme toggle button
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    
+    // Toggle theme function
+    function toggleTheme() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        // Update theme
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+    
+    // Add event listener to theme toggle button
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Optional: Detect system preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // If no saved preference, use system preference
+    if (!localStorage.getItem('theme')) {
+        if (prefersDarkScheme.matches) {
+            html.setAttribute('data-theme', 'dark');
+        }
+    }
+    
+    // Listen for system theme changes
+    prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+        }
+    });
 
-            // Expose to global scope if needed
-            window.ProjectManager = projectManager;
-        });
-    </script>
+    // Add smooth theme transition
+    document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+</script>
 
-    >>>>>>> upstream/main
     <script src="./js/app.js"></script>
 </body>
 
