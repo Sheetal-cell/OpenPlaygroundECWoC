@@ -28,7 +28,7 @@
             <div class="search-container">
                 <p id="UserName">Search UserName</p>
                 <div class="serach-bar">
-                    <input type="text" placeholder="Type UserName Here...">
+                    <input type="text" placeholder="Type UserName Here..." required>
                     <button class="search-btn">Search</button>
                 </div>
             </div>
@@ -36,13 +36,22 @@
                 <div class="user-profile hidden">
                     <div class="user-details">
                         <div class="avator">
-                            <div class="img"></div>
+                            <div class="img">
+                                <img src="" alt="User Avatar">
+                            </div>
                         </div>
                         <div class="profile-details">
-                            <p>Profile Name:</p>
-                            <p>Followers:</p>
-                            <p>Following:</p>
-                            <p>Repositories:</p>
+                            <p id="name"></p>
+                            <p id="bio"></p>
+                            <p id="followers"></p>
+                            <p id="following"></p>
+                            <p id="repos"></p>
+                            <p id="blog"></p>
+                            <p id="company"></p>
+                            <p id="location"></p>
+                            <p id="created-on"></p>
+                            <p id="last-update"></p>
+                            <a id="profile-link" href="" target="_blank">GitHub</a>
                         </div>
                     </div>
                     <div class="repo-list">
