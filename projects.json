@@ -326,6 +326,20 @@
     "icon": "ri-run-line",
     "coverStyle": "background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #00d9ff;"
   },
+  
+  {
+  "title": "Word Twist Challenge",
+  "category": "game",
+  "description": "Guess the correct word from scrambled letters within limited attempts and time.",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JS"
+  ],
+  "link": "./projects/word-twist-challenge/index.html",
+  "icon": "ri-gamepad-line",
+  "coverStyle": "background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: white;"
+},
   {
     "title": "Instagram Bio Generator",
     "category": "utility",
@@ -1084,6 +1098,19 @@
     "coverStyle": "background: #8b5cf6; color: white;"
   },
   {
+  "title": "Word Twist Challenge",
+  "category": "game",
+  "description": "Guess the correct word from scrambled letters within limited attempts and time.",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JS"
+  ],
+  "link": "./projects/word-twist-challenge/index.html",
+  "icon": "ri-gamepad-line",
+  "coverStyle": "background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: white;"
+},
+  {
     "title": "Tower of Hanoi",
     "category": "game",
     "description": "Classic Tower of Hanoi puzzle.",
@@ -1122,6 +1149,44 @@
     "icon": "ri-percent-line",
     "coverStyle": "background: #1e293b; color: #22d3ee;"
   },
+  {
+    "title": "Instagram Bio Generator",
+    "category": "utility",
+    "description": "Generate random Instagram bio suggestions with emojis and vibes.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JS"
+    ],
+    "link": "./projects/Insta_bio_suggesstion/index.html",
+    "icon": "ri-user-line",
+    "coverStyle": "background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); color: #7c2d12;"
+  },
+ {
+  "title": "Hangman Game",
+  "category": "game",
+  "description": "Guess the hidden word one letter at a time before running out of attempts.",
+  "tech": ["HTML", "CSS", "JS"],
+  "link": "./projects/hangman-game/index.html",
+  "icon": "ri-keyboard-line",
+  "coverClass": "hangman-cover"
+},
+{
+  "title": "Word Twist Challenge",
+  "category": "game",
+  "description": "Guess the correct word from scrambled letters within limited attempts and time.",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JS"
+  ],
+  "link": "./projects/word-twist-challenge/index.html",
+  "icon": "ri-gamepad-line",
+  "coverStyle": "background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); color: white;"
+}
+
+
+
   {
     "title": "Truth or Dare",
     "category": "game",
