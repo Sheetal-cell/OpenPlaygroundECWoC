@@ -2,6 +2,7 @@
   {
     "title": "Advanced To-Do App",
     "category": "productivity",
+    "difficulty": "Advanced",
     "description": "Feature-rich task management application with streak tracking, project organization, calendar integration, and dark mode support for enhanced productivity.",
     "tech": [
       "HTML",
@@ -39,6 +40,7 @@
   {
     "title": "Daily Coding Planner",
     "category": "productivity",
+    "difficulty": "Intermediate",
     "description": "Comprehensive planner for developers to organize coding tasks, track progress, and manage learning goals with Pomodoro timer.",
     "tech": [
       "HTML",
@@ -131,6 +133,7 @@
   {
     "title": "Image Preview Uploader",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Preview and validate images before upload with drag and drop support.",
     "tech": [
       "HTML",
@@ -261,6 +264,7 @@
   {
     "title": "Focus Session Companion",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Enhance productivity with timed focus sessions and breaks.",
     "tech": [
       "HTML",
@@ -274,6 +278,7 @@
   {
     "title": "Github Profile Finder",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Find and view GitHub profiles with user details and repositories.",
     "tech": [
       "HTML",
@@ -339,6 +344,7 @@
   {
     "title": "AI Resume Analyzer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Analyze and improve your resume with AI.",
     "tech": [
       "HTML",
@@ -364,6 +370,7 @@
   },
   {
     "title": "Code Editor & Compiler",
+    "difficulty": "Advanced",
     "category": "utility",
     "description": "Browser-based code editor with compiler UI.",
     "tech": [
@@ -469,6 +476,7 @@
   {
     "title": "Infinite Runner",
     "category": "game",
+    "difficulty": "Advanced",
     "description": "Procedural neon runner with parallax.",
     "tech": [
       "HTML",
@@ -573,6 +581,7 @@
   {
     "title": "Password Generator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Generate secure random passwords.",
     "tech": [
       "HTML",
@@ -625,6 +634,7 @@
   {
     "title": "Markdown Editor",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Real-time markdown preview editor.",
     "tech": [
       "HTML",
@@ -651,6 +661,8 @@
   {
     "title": "Tip Calculator",
     "category": "utility",
+    "difficulty": "Beginner",
+    
     "description": "Calculate tips and split bills easily.",
     "tech": [
       "HTML",
@@ -677,6 +689,7 @@
   {
     "title": "Unit Converter",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Convert between different units.",
     "tech": [
       "HTML",
@@ -690,6 +703,7 @@
   {
     "title": "Weather App",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Glassmorphism weather dashboard.",
     "tech": [
       "HTML",
@@ -717,6 +731,7 @@
   {
     "title": "Age Calculator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Calculate your exact age in detail.",
     "tech": [
       "HTML",
@@ -730,6 +745,7 @@
   {
     "title": "BMI Calculator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Calculate your Body Mass Index.",
     "tech": [
       "HTML",
@@ -847,6 +863,7 @@
   {
     "title": "Counter App",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Simple counter with reset functionality.",
     "tech": [
       "HTML",
@@ -939,6 +956,7 @@
   {
     "title": "Habit Tracker",
     "category": "productivity",
+    "difficulty": "Intermediate",
     "description": "Track your daily habits and streaks.",
     "tech": [
       "HTML",
@@ -978,6 +996,7 @@
   {
     "title": "Kanban Board",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Drag-and-drop task management board.",
     "tech": [
       "HTML",
@@ -1069,6 +1088,7 @@
   {
     "title": "QR Code Generator",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Generate and download QR codes.",
     "tech": [
       "HTML",
@@ -1096,6 +1116,7 @@
   {
     "title": "Quote Generator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Generate random inspirational quotes.",
     "tech": [
       "HTML",
@@ -1109,6 +1130,7 @@
   {
     "title": "Random Dice Generator",
     "category": "game",
+    "difficulty": "Beginner",
     "description": "Roll virtual dice with animations.",
     "tech": [
       "HTML",
@@ -1122,6 +1144,7 @@
   {
     "title": "Random Joke Generator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Get random programming jokes.",
     "tech": [
       "HTML",
@@ -1161,6 +1184,7 @@
   {
     "title": "Smart Expense Tracker",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Track your expenses and income.",
     "tech": [
       "HTML",
@@ -1317,6 +1341,7 @@
   {
     "title": "Simple Interest Calculator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Calculate simple interest based on principal, rate, and time.",
     "tech": [
       "HTML",
@@ -1644,6 +1669,7 @@
   {
     "title": "Percentage Calculator",
     "category": "utility",
+    "difficulty": "Beginner",
     "description": "Calculate percentages quickly and easily.",
     "tech": [
       "HTML",
@@ -1670,6 +1696,7 @@
   {
     "title": "Sudoku Solver",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Play Sudoku, generate infinite puzzles, or watch the AI solve them.",
     "tech": [
       "HTML",
@@ -1774,6 +1801,7 @@
   {
     "title": "Neon Snake Arena",
     "category": "game",
+    "difficulty": "Advanced",
     "description": "A neon-styled Snake game with smooth motion, power-ups, and arena challenges.",
     "tech": [
       "HTML",
@@ -1787,6 +1815,7 @@
   {
     "title": "Pathfinding Visualizer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Interactive visualizer for pathfinding algorithms like Dijkstra, A*, BFS, and DFS.",
     "tech": [
       "HTML",
@@ -1843,6 +1872,7 @@
   {
     "title": "SQL Query Visualizer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Interactive visualizer for SQL joins using Set Theory diagrams.",
     "tech": [
       "HTML",
@@ -1932,6 +1962,7 @@
   {
     "title": "Chess Game",
     "category": "strategy",
+    "difficulty": "Advanced",
     "description": "Luxury-styled two-player chess game with drag-and-drop pieces, move validation, and elegant glassmorphic design.",
     "tech": [
       "HTML",
@@ -1958,6 +1989,7 @@
   {
     "title": "Dictionary",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Simple dictionary app to search for word meanings instantly with clean interface and API integration.",
     "tech": [
       "HTML",
@@ -2194,6 +2226,7 @@
   {
     "title": "Notification Center Simulator",
     "category": "utility",
+    "difficulty": "Intermediate",
     "description": "Modern notification management system with filtering, sorting, bulk actions, and settings panel.",
     "tech": [
       "HTML",
@@ -2233,6 +2266,7 @@
   {
     "title": "Pixel Sandbox",
     "category": "game",
+    "difficulty": "Advanced",
     "description": "Interactive pixel physics sandbox with falling sand, water, stone, and acid simulation.",
     "tech": [
       "HTML",
@@ -2324,6 +2358,7 @@
   {
     "title": "Sorting Visualizer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Visual representation of sorting algorithms including bubble, merge, quick, and heap sort.",
     "tech": [
       "HTML",
@@ -2337,6 +2372,7 @@
   {
     "title": "SQL Query Visualizer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Interactive drag-and-drop tool to visualize SQL joins using set theory and Venn diagrams.",
     "tech": [
       "HTML",
@@ -2363,6 +2399,7 @@
   {
     "title": "System Design Visualizer",
     "category": "utility",
+    "difficulty": "Advanced",
     "description": "Step-by-step visualization of system architecture patterns like URL shortener with explanations.",
     "tech": [
       "HTML",
