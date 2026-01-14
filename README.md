@@ -10,6 +10,8 @@
 
 **🌐 [View Live Website](https://open-playground-seven.vercel.app/) | 📖 [Contributing Guide](CONTRIBUTING.md) | 💬 [Discussions](https://github.com/YadavAkhileshh/OpenPlayground/discussions)**
 
+• Project spotlight: Recipe – [Landing Page Preview](./projects/Recipe/landing.html)
+
 ---
 
 ## 🚀 What is OpenPlayground?
