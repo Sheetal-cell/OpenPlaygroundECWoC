@@ -1,4 +1,18 @@
 [
+  {
+    "title": "Random Name Picker for Groups",
+    "category": "utility",
+    "difficulty": "Beginner",
+    "description": "A fun and simple random name picker for group activities, classroom decisions, or team events. Features smooth animations, confetti effects, and picking history.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "./projects/RandomNamePicker/index.html",
+    "icon": "ri-user-search-line",
+    "coverStyle": "background: linear-gradient(135deg, #6366f1 0%, #f43f5e 100%); color: white;"
+  },
     {
     "title": "Sphere of Contributors",
     "category": "utility",
