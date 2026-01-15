@@ -1,4 +1,21 @@
 [
+  {
+    "title": "Pixel Art Studio",
+    "category": "productivity",
+    "difficulty": "Intermediate",
+    "description": "A browser-based editor for creating 8-bit style pixel art with customizable grids, color palettes, drawing tools, and export functionality.",
+    "tech": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Canvas API",
+      "Grid Layout",
+      "LocalStorage"
+    ],
+    "link": "./projects/PixelArtStudio/index.html",
+    "icon": "ri-brush-line",
+    "coverStyle": "background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #c4b5fd 100%); color: white;"
+  },
     {
     "title": "Sphere of Contributors",
     "category": "utility",
