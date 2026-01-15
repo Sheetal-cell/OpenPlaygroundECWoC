@@ -3305,5 +3305,15 @@
     "link": "./projects/flowlogic/index.html",
     "icon": "ri-flow-chart",
     "coverStyle": "background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 50%, #fae8ff 100%); color: #581c87;"
-  }
+  },
+  {
+  "title": "UI As Enemy",
+  "category": "fun",
+  "description": "An experimental game where the user interface itself acts as the main antagonist.",
+  "tech": ["HTML", "CSS", "JavaScript"],
+  "link": "./projects/ui-as-enemy/index.html",
+  "icon": "ri-bug-line",
+  "coverStyle": "background: linear-gradient(135deg, #1f2933 0%, #111827 100%); color: #f9fafb;"
+}
+
 ]
