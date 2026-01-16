@@ -46,36 +46,36 @@
     "coverStyle": "background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #5a6782;"
   },
   {
-  "title": "365 Days No-Zero Tracker",
-  "category": "productivity",
-  "difficulty": "Beginner",
-  "description": "A visual productivity tracker based on the No-Zero Days philosophy. Mark daily progress, maintain streaks, view monthly calendars, and stay motivated with dynamic quotes.",
-  "tech": [
-    "HTML5",
-    "CSS3",
-    "JavaScript",
-    "LocalStorage",
-    "Date API"
-  ],
-  "link": "./projects/NoZeroTracker/index.html",
-  "icon": "ri-calendar-check-line",
-  "coverStyle": "background: linear-gradient(135deg, #b5eaea 0%, #a8d8ea 50%, #ffd3b6 100%); color: #5a6b8c;"
-},
+    "title": "365 Days No-Zero Tracker",
+    "category": "productivity",
+    "difficulty": "Beginner",
+    "description": "A visual productivity tracker based on the No-Zero Days philosophy. Mark daily progress, maintain streaks, view monthly calendars, and stay motivated with dynamic quotes.",
+    "tech": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "LocalStorage",
+      "Date API"
+    ],
+    "link": "./projects/NoZeroTracker/index.html",
+    "icon": "ri-calendar-check-line",
+    "coverStyle": "background: linear-gradient(135deg, #b5eaea 0%, #a8d8ea 50%, #ffd3b6 100%); color: #5a6b8c;"
+  },
   {
-  "title": "Random Mini Challenge Generator",
-  "category": "productivity",
-  "description": "Generate small, achievable challenges to encourage healthy breaks with friendly UI and progress tracking.",
-  "tech": [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "LocalStorage"
-  ],
-  "link": "./projects/ChallengeGenerator/index.html",
-  "icon": "ri-gamepad-line",
-  "coverStyle": "background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #5a6782;"
-},
-    {
+    "title": "Random Mini Challenge Generator",
+    "category": "productivity",
+    "description": "Generate small, achievable challenges to encourage healthy breaks with friendly UI and progress tracking.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "LocalStorage"
+    ],
+    "link": "./projects/ChallengeGenerator/index.html",
+    "icon": "ri-gamepad-line",
+    "coverStyle": "background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #5a6782;"
+  },
+  {
     "title": "Sphere of Contributors",
     "category": "utility",
     "difficulty": "Intermediate",
@@ -350,7 +350,7 @@
     "icon": "ri-grid-line",
     "coverClass": "tictactoe-cover"
   },
-    {
+  {
     "title": "Dianosur",
     "category": "puzzle",
     "description": "dianosur game ",
@@ -376,10 +376,7 @@
     "icon": "ri-focus-line",
     "coverStyle": "background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;"
   },
-   {
-    "title": "Ultimate Ride ",
-    "category": "game",
-    "description": "A fast-paced racing game with neon visuals and challenging tracks.",
+  {
     "title": "Stick With Hero Game",
     "category": "game",
     "description": "A simple and engaging stick hero game where players control a character to build sticks and cross platforms while avoiding obstacles.",
@@ -388,8 +385,6 @@
       "CSS",
       "JS"
     ],
-    "link": "./projects/ultimate-ride/index.html",
-    "icon": "ri-car-line",
     "link": "./projects/stick-with-hero/index.html",
     "icon": "ri-walk-line",
     "coverStyle": "background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;"
@@ -3420,38 +3415,32 @@
     "link": "./projects/flowlogic/index.html",
     "icon": "ri-flow-chart",
     "coverStyle": "background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 50%, #fae8ff 100%); color: #581c87;"
-  }
-]
   },
   {
-  "title": "UI As Enemy",
-  "category": "fun",
-  "description": "An experimental game where the user interface itself acts as the main antagonist.",
-  "tech": ["HTML", "CSS", "JavaScript"],
-  "link": "./projects/ui-as-enemy/index.html",
-  "icon": "ri-bug-line",
-  "coverStyle": "background: linear-gradient(135deg, #1f2933 0%, #111827 100%); color: #f9fafb;"
-},
-{
-  "title": "CPU Scheduling Visualizer",
-  "category": "utility",
-  "difficulty": "Advanced",
-  "description": "An interactive CPU scheduling visualizer that helps users understand how common scheduling algorithms work. Users can define processes, select algorithms, and watch animated Gantt chart execution with calculated waiting and turnaround times for educational clarity.",
-  "tech": ["HTML", "CSS", "JavaScript"],
-  "link": "./projects/CPU Scheduling Visualizer/index.html",
-  "icon": "ri-cpu-line",
-  "coverStyle": "background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #020617 100%); color: #e5e7eb;"
-},
-{
-  "title": "Brainforge",
-  "category": "utility",
-  "difficulty": "Advanced",
-  "description": "An interactive browser-based project focused on training logic, reasoning, and cognitive patterns.",
-  "tech": ["HTML", "CSS", "JavaScript"],
-  "link": "./projects/brainforge/index.html",
-  "icon": "ri-brain-line",
-  "coverStyle": "background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #e0f2fe 100%); color: #312e81;"
-}
-
-
+    "title": "UI As Enemy",
+    "category": "fun",
+    "description": "An experimental game where the user interface itself acts as the main antagonist.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "./projects/ui-as-enemy/index.html",
+    "icon": "ri-bug-line",
+    "coverStyle": "background: linear-gradient(135deg, #1f2933 0%, #111827 100%); color: #f9fafb;"
+  },
+  {
+    "title": "CPU Scheduling Visualizer",
+    "category": "utility",
+    "difficulty": "Advanced",
+    "description": "An interactive CPU scheduling visualizer that helps users understand how common scheduling algorithms work. Users can define processes, select algorithms, and watch animated Gantt chart execution with calculated waiting and turnaround times for educational clarity.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "./projects/CPU Scheduling Visualizer/index.html",
+    "icon": "ri-cpu-line",
+    "coverStyle": "background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #020617 100%); color: #e5e7eb;"
+  }
 ]
