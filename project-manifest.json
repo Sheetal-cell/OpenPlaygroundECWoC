@@ -1277,6 +1277,11 @@
       "folder": "WorldMeetingPlanner",
       "path": "./projects/WorldMeetingPlanner/project.json",
       "link": "./projects/WorldMeetingPlanner/index.html"
+    },
+    {
+      "folder": "color-blindness-checker",
+      "path": "./projects/color-blindness-checker/project.json",
+      "link": "./projects/color-blindness-checker/index.html"
     }
   ]
 }
